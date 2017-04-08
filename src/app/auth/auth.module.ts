@@ -8,18 +8,20 @@ import {AuthResourceService, AuthRequestOptions} from "./resources";
 import {LoginComponent, LogoutComponent,
   RegisterComponent} from "./components";
 import {SharedModule} from "../shared/shared.module";
+import {RouterModule} from "@angular/router";
+import {AuthGuard} from "./services/auth-guard.service";
 
 @NgModule({
   declarations: [
     // TODO: Add declarations here, if additional components are placed within the Auth module
-    LoginComponent, LogoutComponent, RegisterComponent
+    LoginComponent, LogoutComponent, RegisterComponent,
   ],
   imports: [
-    SharedModule
+    SharedModule,  RouterModule,
   ],
   exports: [
     // TODO: Add declarations here, if additional components are placed within the Auth module
-    LoginComponent, LogoutComponent, RegisterComponent
+    LoginComponent, LogoutComponent, RegisterComponent,
   ],
   providers: [ ]
 })
@@ -34,6 +36,7 @@ export class AuthModule {
         // TODO: Add services/guards/... here, if additional classes are placed within the Auth module
         AuthResourceService,
         AuthService,
+        AuthGuard,
         SecurityTokenStore,
         {
           provide: RequestOptions,

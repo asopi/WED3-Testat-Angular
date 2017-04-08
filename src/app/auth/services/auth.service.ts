@@ -11,7 +11,7 @@ export class AuthService {
 
   public authenticatedUserChange:EventEmitter<Account> = new EventEmitter<Account>();
 
-  public get authenticatedUser():Account {
+  public get authenticatedUser(): Account {
     return this.authUser;
   }
 
@@ -34,9 +34,9 @@ export class AuthService {
       } );
   }
 
-  public login(loginModel:LoginInfo):void {
+  public login(loginModel: LoginInfo):void {
     this.resource.login(loginModel).subscribe(
-      (data:Credential) => {
+      (data: Credential) => {
         this.tokenStore.storedValue = data;
         this.authUser = !isBlank(data)? data.owner : null;
         this.authenticatedUserChange.emit(this.authenticatedUser);

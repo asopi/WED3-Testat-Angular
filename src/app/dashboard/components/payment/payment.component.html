@@ -1,0 +1,64 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Payment</h3>
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal" *ngIf="!paymentDone" (ngSubmit)="pay(payForm)" #payForm="ngForm">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="from">From:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="from" reaonly disabled
+                 value="{{myAccount?.accountNr}} [{{myAccount?.amount | currencydisplay}}]">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="to">To:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="to" placeholder="Receiver ID" [(ngModel)]="toAccount" name="toAccount" required
+                 (ngModelChange)="onTargetAccountChange()"
+                 #toAccountValidation="ngModel">
+                <div [hidden]="(toAccountValidation.valid || toAccountValidation.pristine)" class="error">
+                  Please specify the target account
+                </div>
+
+          <div [hidden]="!toAccountValidation.valid" >
+            <div class="alert alert-danger" role="alert" *ngIf="targetAccount == null">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              Unknown account number
+            </div>
+
+            <div class="alert alert-success" role="alert" *ngIf="targetAccount">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              {{targetAccount.firstname}} {{targetAccount.lastname}}
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="amount">Amount in CHF:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="amount" placeholder="Amount in CHF" [(ngModel)]="amount" name="amount" required
+                 #amountValidation="ngModel">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" [disabled]="!payForm.form.valid || !targetAccount">Pay</button>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="alert alert-success" *ngIf="paymentDone">
+      <div>Transaction to {{targetAccount?.accountNr}} succeeded</div>
+      <div>New balance <span>{{myAccount.amount | currencydisplay}}</span>  </div>
+
+      <button class="btn btn-primary" (click)="reset()">Start over</button>
+    </div>
+
+  </div>
+</div>

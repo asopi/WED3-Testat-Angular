@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" >
+        FinancePortal
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--TODO: Unterscheiden ob Menuelink aktiv oder nicht-->
+        <li class="active"><a [routerLink]="['./']" [routerLinkActive]="['active']">Home</a></li>
+        <li><a [routerLink]="['transactions']" [routerLinkActive]="['active']">Account Transactions</a></li>
+      </ul>
+      <wed-logout></wed-logout>
+    </div>
+
+  </div>
+</nav>
+
+
+<span class="sr-only">(current)</span>

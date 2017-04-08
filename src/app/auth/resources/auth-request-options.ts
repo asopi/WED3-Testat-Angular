@@ -19,7 +19,7 @@ export class AuthRequestOptions extends RequestOptions {
     }
   }
 
-  public merge(options?:any):RequestOptions {
+  public merge(options?:any): RequestOptions {
     return new AuthRequestOptions(this.tokenStore, super.merge(options));
   }
 

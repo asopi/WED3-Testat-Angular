@@ -1,0 +1,42 @@
+<div>
+  <h3>Filter</h3>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label>Select a Year
+      <select class="btn btn-default btn-lg dropdown-toggle" [(ngModel)]="selectedYear" (ngModelChange)="onDateChange()">
+      <option *ngFor="let y of years" value="{{y}}">{{y}}</option>
+      </select>
+      </label>
+
+    </div>
+    <div class="col-md-6">
+      <label>Select a month
+      <select class="btn btn-default btn-lg dropdown-toggle" [(ngModel)]="selectedMonth" (ngModelChange)="onDateChange()">
+      <option *ngFor="let m of months; let i = index;" value="{{i}}">{{m}}</option>
+      </select>
+      </label>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Target</th>
+    <th>Amount</th>
+    <th>Balance</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr *ngFor="let t of allTransactions">
+    <td>{{t.from}}</td>
+    <td>{{t.target}}</td>
+    <td>{{t.amount | currencydisplay }}</td>
+    <td>{{t.total | currencydisplay}}</td>
+  </tr>
+
+  </tbody>
+</table>
