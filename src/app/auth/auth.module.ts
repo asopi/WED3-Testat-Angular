@@ -10,18 +10,19 @@ import {LoginComponent, LogoutComponent,
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {AuthGuard} from "./services/auth-guard.service";
+import {EqualDirective} from "./directive/equal.directive";
 
 @NgModule({
   declarations: [
     // TODO: Add declarations here, if additional components are placed within the Auth module
-    LoginComponent, LogoutComponent, RegisterComponent,
+    LoginComponent, LogoutComponent, RegisterComponent,  EqualDirective
   ],
   imports: [
     SharedModule,  RouterModule,
   ],
   exports: [
     // TODO: Add declarations here, if additional components are placed within the Auth module
-    LoginComponent, LogoutComponent, RegisterComponent,
+    LoginComponent, LogoutComponent, RegisterComponent,  EqualDirective
   ],
   providers: [ ]
 })
