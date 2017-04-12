@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {AccountResourceService} from "../resources/account-resource-service";
 import {Observable} from "rxjs";
 import {Transaction} from "../models/transaction";
-import {ExtendedAccount} from "../models/extended-account";
+import {DashboardAccount} from "../models/dashboard-account";
 
 @Injectable()
 export class AccountService {
@@ -16,7 +16,7 @@ export class AccountService {
   constructor(private accountResource: AccountResourceService) {
   }
 
-  public getAccount(id?: number): Observable<ExtendedAccount> {
+  public getAccount(id?: number): Observable<DashboardAccount> {
     return this.accountResource.getAccount(id);
   }
 

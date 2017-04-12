@@ -4,7 +4,7 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {Account} from "../../auth/models/account";
 import {Transaction} from "../models/transaction";
-import {ExtendedAccount} from "../models/extended-account";
+import {DashboardAccount} from "../models/dashboard-account";
 
 @Injectable()
 export class AccountResourceService extends ResourceBase {
@@ -13,16 +13,16 @@ export class AccountResourceService extends ResourceBase {
     super(http);
   }
 
-  public getAccount(id?: number): Observable<ExtendedAccount> {
+  public getAccount(id?: number): Observable<DashboardAccount> {
     return this.get(`/accounts/${id ? id : ''}`)
       .map((response: Response) => {
         let result = response.json();
         if (result) {
-          return ExtendedAccount.fromDto(result);
+          return DashboardAccount.fromDto(result);
         }
         return null;
       }).catch((error: any) => {
-        return Observable.of<ExtendedAccount>(null);
+        return Observable.of<DashboardAccount>(null);
       });
   }
 
@@ -32,10 +32,7 @@ export class AccountResourceService extends ResourceBase {
       target: toAccount.toString(),
       amount: amount
     };
-    /*
-     * - Wie weiss die Server von welchem Account die Geld abgehoben werden soll?
-     * - Wieso wird hier eine .map() verwendet anstatt einer subscribe?
-     * */
+
     return this.post(url, dto)
       .map((response: Response) => {
         let result = response.json();
@@ -47,8 +44,6 @@ export class AccountResourceService extends ResourceBase {
   }
 
   public getTransactions(fromDate: Date, toDate: Date, count?: number, skip?: number): Observable<Transaction[]> {
-    // TODO filter parameters
-    //accounts/transactions?fromDate=2016-05-11T02:00:00.000Z&toDate=2016-12-11T02:00:00.000Z&count=4
     let url = `/accounts/transactions?fromDate=${fromDate.toISOString()}&toDate=${toDate.toISOString()}&count=${count}`;
     return this.get(url)
       .map((response: Response) => {

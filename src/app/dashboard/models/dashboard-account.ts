@@ -1,6 +1,6 @@
 import {Account} from "../../auth/models/account";
 
-export class ExtendedAccount extends Account {
+export class DashboardAccount extends Account {
   constructor(login: string,
               firstname: string,
               lastname: string,
@@ -9,8 +9,8 @@ export class ExtendedAccount extends Account {
     super(login, firstname, lastname, accountNr);
   }
 
-  public static fromDto(data: any): ExtendedAccount {
-    return new ExtendedAccount(data.owner.login, data.owner.firstname, data.owner.lastname, data.accountNr, data.amount);
+  public static fromDto(data: any): DashboardAccount {
+    return new DashboardAccount(data.owner.login, data.owner.firstname, data.owner.lastname, data.accountNr, data.amount);
   }
 
   toDto(): any {

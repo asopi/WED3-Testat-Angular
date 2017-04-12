@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AccountService} from "../../services/account.service";
-import {ExtendedAccount} from "../../models/extended-account";
+import {DashboardAccount} from "../../models/dashboard-account";
 
 @Component({
   selector: 'payment',
@@ -10,8 +10,8 @@ import {ExtendedAccount} from "../../models/extended-account";
 })
 export class PaymentComponent implements OnInit {
 
-  private myAccount: ExtendedAccount;
-  public targetAccount: ExtendedAccount;
+  private myAccount: DashboardAccount;
+  public targetAccount: DashboardAccount;
 
   public toAccount: string;
   public amount: number;
@@ -30,7 +30,7 @@ export class PaymentComponent implements OnInit {
   private updateAccount(){
     this.accountService.getAccount()
       .subscribe(
-        (extendedAccount: ExtendedAccount) => {
+        (extendedAccount: DashboardAccount) => {
           this.myAccount = extendedAccount;
         }
       );
@@ -54,7 +54,7 @@ export class PaymentComponent implements OnInit {
     if (this.toAccount) {
       this.accountService.getAccount(parseInt(this.toAccount, 10))
         .subscribe(
-          (account: ExtendedAccount) => this.targetAccount = account
+          (account: DashboardAccount) => this.targetAccount = account
         );
     }
   }
